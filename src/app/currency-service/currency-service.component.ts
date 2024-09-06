@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Currency } from 'src/app/Currency';
 import { ExchangeRateResponse, CountryCurrencyInfo } from '../Currency';
-// api_exchange_rate: 'https://open.er-api.com/v6/latest/USD',
-// api_country_CURRENCY: 'https://restcountries.com/v3.1/all?fields=currencies'
-// import {api_exchange_rate, api_country_currency} from '../../environments/environment'
 import { environment } from '../../environments/environment'
 
 @Injectable({
