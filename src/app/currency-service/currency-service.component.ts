@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Currency } from 'src/app/Currency';
 import { ExchangeRateResponse, CountryCurrencyInfo } from '../Currency';
+// api_exchange_rate: 'https://open.er-api.com/v6/latest/USD',
+// api_country_CURRENCY: 'https://restcountries.com/v3.1/all?fields=currencies'
+// import {api_exchange_rate, api_country_currency} from '../../environments/environment'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +13,8 @@ import { ExchangeRateResponse, CountryCurrencyInfo } from '../Currency';
 export class CurrencyService {
   private currencies: Currency[] = [];
   private lastUpdate?: string;
-  private readonly exchangeRateUrl = 'https://open.er-api.com/v6/latest/USD';
-  private readonly countryCurrencyUrl = 'https://restcountries.com/v3.1/all?fields=currencies';
+  private readonly exchangeRateUrl = environment.api_exchange_rate;
+  private readonly countryCurrencyUrl = environment.api_country_currency;
 
   constructor(private http: HttpClient) {}
 
