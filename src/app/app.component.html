@@ -1,0 +1,60 @@
+<div class="converter-container">
+  <div class="converter-card">
+    <h1>Currency Converter</h1>
+    <div *ngIf="isDataAvailable">
+      <form name="currency-form" (ngSubmit)="onSubmit()">
+        <div class="currency-form-group" #formExchange (window:resize)="windowResize()">
+          <label>Amount</label>
+          <div>
+            <div class="amount-input-group">
+              <span class="currency-prefix">{{from_symbol}}</span>
+              <input required lang="en-US" type="number" [(ngModel)]="amount_value" (change)="changeAmountValue()"
+                name="amount" (focusout)="changeAmountValue()" #amount_input placeholder="Amount" step="0.01">
+            </div>
+          </div>
+
+          <label>From</label>
+          <app-currency-selector #from [selectorId]="'from'" [changeCurrency]="selectFrom"></app-currency-selector>
+          <div></div>
+          <button class="currency-switch-btn" type="button" (click)="switchCurrencies()">
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
+
+          <label>To</label>
+          <app-currency-selector #to [selectorId]="'to'" [changeCurrency]="selectTo"></app-currency-selector>
+        </div>
+
+        <div class="convert-button-group" [style.width.px]="formExchange.offsetWidth" #submitBtn *ngIf="!isResult">
+          <button type="submit">Convert</button>
+        </div>
+
+      </form>
+      <div class="conversion-result" *ngIf="isResult">
+        <div class="conversion-result-from">
+          {{resultFrom}}
+        </div>
+
+        <div class="conversion-result-to">
+          {{resultTo}}
+        </div>
+        <div class="conversion-result-info">
+          {{resultInfo}}
+        </div>
+      </div>
+    </div>
+    <div class="loading-spinner" *ngIf="!isDataAvailable && !failedToLoad">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div *ngIf="failedToLoad" [style.text-align]="'center'">
+      <h2>
+        <i class="bi bi-bug-fill"></i></h2>
+      <h3>Failed to load exchange rate from the server</h3>
+    </div>
+
+  </div>
+
+</div>
